@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <title>{% block title %}Gestion Carte Etudiant{% endblock %}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    {% load static %}
+    <link rel="stylesheet" href="#">
+</head>
+<body>
+
+    {% comment %} {% include 'registration/login.html' %} {% endcomment %}
+
+    <main class="container mt-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2024 Gestion Carte Etudiant</p>
+            </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zyM8x7e+6v+T2gbWAGTXsF6ZgMZgkC7rr9R9H1EB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0to4z3bI3kfuD0V2sm1pF7xVZon5pg35d5yqNNfF7tC4a3D0" crossorigin="anonymous"></script>
+
+</body>
+</html>

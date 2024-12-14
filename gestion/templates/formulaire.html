@@ -1,0 +1,126 @@
+{% extends 'basee.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+<!-- templates/etudiants/formulaire.html -->
+<h1>Formulaire étudiant</h1>
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+{% endfor %}
+<form method="POST" enctype="multipart/form-data" class="form-group">
+  {% csrf_token %}
+  {{ form.as_p }}
+  
+  {% comment %} <div class="row">
+    <div class="col-lg-3">
+      <div class="form-group">
+        <label class="form-control-label" for="immatriculation">Immatriculation</label>
+        <input type="text_number" id="immatriculation" class="form-control" name="immatriculation" placeholder="Immatriculation" required>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="form-group">
+        <label class="form-control-label" for="nom">Nom</label>
+        <input type="text" id="nom" name="nom" class="form-control" placeholder="Nom" required>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="form-group">
+        <label class="form-control-label" for="prenom">Prénom</label>
+        <input type="text" id="prenom" name="prenom" class="form-control" placeholder="Prénom" required>
+      </div>
+    </div>
+
+    <div class="col-lg-2">
+      <div class="form-group">
+        <label class="form-control-label" for="sexe">Sexe</label>
+        <select id="sexe" name="sexe" class="form-control" required>
+          <option value="M">Masculin</option>
+          <option value="F">Féminin</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-lg-3">
+      <div class="form-group">
+        <label class="form-control-label" for="date_naissance">Date de Naissance</label>
+        <input type="date" id="date_naissance" class="form-control" name="date_naissance" placeholder="Date de Naissance" required>
+      </div>
+    </div>
+
+    <div class="col-lg-3">
+      <div class="form-group">
+        <label class="form-control-label" for="num_telephone">Numéro de téléphone</label>
+        <input type="number" id="num_telephone" class="form-control" name="num_telephone" placeholder="Numéro de téléphone">
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="form-group">
+        <label class="form-control-label" for="lieu">Lieu</label>
+        <input type="text" id="lieu" name="lieu" class="form-control" placeholder="Lieu">
+      </div>
+    </div>
+
+    <div class="col-lg-2">
+      <div class="form-group">
+        <label class="form-control-label" for="centre_formation">Centre de formation</label>
+        <select id="centre_formation" name="centre_formation" class="form-control" required>
+          <option value="Toliara">Toliara</option>
+          <option value="Fianarantsoa">Fianarantsoa</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-2">
+      <div class="form-group">
+        <label class="form-control-label" for="parcours">Parcours</label>
+        <select id="parcours" name="parcours" class="form-control" required>
+       
+            <option value="IG">Informatique General</option>
+            <option value="GB">Génie Logiciel</option>
+            <option value="SR">Systèmes et réseaux</option>
+         
+        </select>
+      </div>
+    </div>
+    
+    <div class="col-lg-2">
+      <div class="form-group">
+        <label class="form-label" for="niveau">Niveau</label>
+        <select id="niveau" name="niveau" class="form-control" required>
+          {% for niveau in niveaux %}
+            <option value="{{ niveau.id }}">{{ niveau.nom }}</option> {% endfor %}
+        </select>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="form-group">
+        <label class="form-control-label" for="photo">Photo</label>
+        <input type="file" id="photo" class="form-control-file" name="photo">
+      </div>
+    </div>
+     {% endcomment %}
+    <button type="submit">Ajouter</button>
+    </form>
+<script>
+function afficherMessage(message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('alert', 'alert-success'); // Adaptez les classes CSS
+    messageDiv.textContent = message;
+    document.body.appendChild(messageDiv);
+}
+</script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+
+{% endblock %} 
+

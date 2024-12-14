@@ -1,0 +1,14 @@
+{% extends 'basee.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Ajouter Niveau</h1>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Ajouter</button>
+</form> 
+</div>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+{% endblock %} 

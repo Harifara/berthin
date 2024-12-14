@@ -1,0 +1,81 @@
+{% extends 'basee.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+
+<h1>Ajouter une note</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Ajouter</button>
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const semestreField = document.querySelector('#id_semestre');
+        const ueField = document.querySelector('#id_ue');
+        const matiereField = document.querySelector('#id_matiere');
+        
+        semestreField.addEventListener('change', function() {
+            const semestreId = this.value;
+            if (!semestreId) {
+                ueField.innerHTML = '<option value="">-- Select UE --</option>';
+                matiereField.innerHTML = '<option value="">-- Select Matière --</option>';
+                ueField.disabled = true;
+                matiereField.disabled = true;
+                return;
+            }
+    
+            fetch(`/get-ue/${semestreId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    ueField.innerHTML = '<option value="">-- Select UE --</option>';
+                    data.ues.forEach(ue => {
+                        const option = document.createElement('option');
+                        option.value = ue.id;
+                        option.textContent = ue.nom;
+                        ueField.appendChild(option);
+                    });
+                    ueField.disabled = false;
+                });
+        });
+        
+        ueField.addEventListener('change', function() {
+            const ueId = this.value;
+            if (!ueId) {
+                matiereField.innerHTML = '<option value="">-- Select Matière --</option>';
+                matiereField.disabled = true;
+                return;
+            }
+    
+            fetch(`/get-matiere/${ueId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    matiereField.innerHTML = '<option value="">-- Select Matière --</option>';
+                    data.matieres.forEach(matiere => {
+                        const option = document.createElement('option');
+                        option.value = matiere.id;
+                        option.textContent = matiere.nom;
+                        matiereField.appendChild(option);
+                    });
+                    matiereField.disabled = false;
+                });
+        });
+    });
+    
+    
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+
+{% endblock %}

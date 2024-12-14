@@ -1,0 +1,196 @@
+{% extends 'basee.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Tableau de Bord</h1>
+  </div>
+
+  <!-- Content Row -->
+  <div class="row">
+
+    <!-- Card Example: Nombre d'Étudiants -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <a href="liste_etudiants" style="text-decoration: none;">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                  Étudiants</div>
+                <div class="h5 mb-0 font-weight-bold text-black-800">{{ nombre_etudiants }}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-user-graduate fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+
+    <!-- Card Example: Nombre d'Établissements -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <a href="card_view" style="text-decoration: none;">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                Carte Etudiant</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ etablissement_count }}</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-school fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+    </div>
+
+    <!-- Card Example: Nombre de Cours -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <a href="list_ue" style="text-decoration: none;">
+      <div class="card border-left-info shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                Unite d'enseignement</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ cours_count }}</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-book fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+    </div>
+
+    <!-- Card Example: Nombre d'Enseignants -->
+    <div class="col-xl-3 col-md-6 mb-4">
+     <a href="list_enseignant" style="text-decoration: none;">
+      <div class="card border-left-warning shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                Enseignants</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ nombre_enseignants }}</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-chalkboard-teacher fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+  </div>
+
+  <!-- Content Row -->
+  <div class="row">
+    <!-- Pie Chart Example -->
+    <div class="col-xl-6 col-lg-5">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Répartition des étudiants par niveau</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="chart-pie pt-4">
+            <canvas id="niveauChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-6 col-lg-4">
+      <div class="card shadow mb-3">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Satatistique</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="chart-pie pt-4">
+            <canvas id="enseignantGenderChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+  <script>
+    const ctx = document.getElementById('niveauChart').getContext('2d');
+    const niveauChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['L1', 'L2', 'L3', 'M1', 'M2'], // Niveaux
+            datasets: [{
+                label: 'Nombre d\'étudiants par niveau',
+                data: [
+                    {{ l1_count }},
+                    {{ l2_count }},
+                    {{ l3_count }},
+                    {{ m1_count }},
+                    {{ m2_count }},
+                ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.label + ': ' + tooltipItem.raw + ' étudiants';
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
+
+  
+
+<!-- Scripts supplémentaires pour le graphique -->
+
+
+{% endblock %} 

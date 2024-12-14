@@ -1,0 +1,12 @@
+<h1>Détails de l'étudiant {{ etudiant.nom }}</h1>
+<ul>
+    {% for note in notes %}
+    <li>{{ note.valeur }} - {{ note.matiere.nom }} - Semestre {{ note.semestre.semestre }} - {{ note.ue.nom }}</li>
+    {% endfor %}
+</ul>
+<h2>Unités d'enseignement</h2>
+<ul>
+    {% for ue in ues %}
+    <li>{{ ue.nom }}: {{ ue.a_obtenu_credits|yesno:"a obtenu, n'a pas obtenu" }} tous les crédits</li>
+    {% endfor %}
+</ul>

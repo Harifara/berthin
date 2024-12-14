@@ -1,0 +1,118 @@
+{% extends 'basee.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+<!-- templates/etudiants/formulaire.html -->
+<h1>Ajouter Enseignant</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Ajouter</button>
+</form> 
+
+
+
+{% comment %} 
+<div class="col-xl-12 order-xl">
+    <div class="card">
+      <div class="card-header">
+        <div class="row align-items-center">
+          <div class="col-8">
+            <h3 class="mb-0">Ajoutez les informations </h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form enctype="multipart/form-data"  class="form-group" method="POST">
+          {% csrf_token %}
+         
+          <h6 class="heading-small text-muted mb-4">Information personnel</h6>
+          <div class="pl-lg-4">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label" for="nom">Nom</label>
+                  <input type="text" id="nom" name="nom" class="form-control" placeholder="nom" required>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label" for="Prenom">Prenom</label>
+                  <input type="text" id="prenom" name="prenom" class="form-control" placeholder="Prenom">
+                </div>
+              </div>
+        <div class="row">                      
+              <div class="col-lg-2">
+                <div class="form-group">
+                  <label class="form-control-label" for="sexe">Sexe</label>
+                  <select id="sexe" name="sexe" class="form-control" required>
+                    <option value="M">Masculin</option>
+                    <option value="F">Féminin</option>
+                  </select>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-control-label" for="photo">Image</label>
+              <input type="file" id="photo" name="photo" class="form-control-file">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-control-label" for="email">E-mail</label>
+              <input type="e-mail" id="email" name="email" class="form-control-file">
+            </div>
+          </div>
+           
+              
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label" for="date_naissance">Date de Naissance</label>
+                  <input type="date" id="date_naissance" class="form-control" name="date_naissance" placeholder="Date de Naissance" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="num_telephone">Numéro de téléphone</label>
+                    <input type="number" id="num_telephone" class="form-control" name="num_telephone" placeholder="Numéro de téléphone" required>
+                </div>
+              </div>
+            
+            
+            </div>
+          </div>
+         
+          <!-- Address -->
+         
+    
+<button type="submit" class="btn btn-primary">Ajouter</button>
+
+ 
+</form> {% endcomment %}
+
+</div>
+
+
+
+
+
+
+
+<script>
+function afficherMessage(message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('alert', 'alert-success'); // Adaptez les classes CSS
+    messageDiv.textContent = message;
+    document.body.appendChild(messageDiv);
+}
+</script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+
+{% endblock %} 

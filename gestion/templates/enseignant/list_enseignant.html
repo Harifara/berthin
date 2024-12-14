@@ -1,0 +1,125 @@
+{% extends 'basee.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="container-fluid">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <div class="row mb-4">
+    <div class="col text-right">
+        <a href="{% url 'home' %}" class="btn btn-primary">Retour</a>
+    </div>
+  </div>
+    <h1 class="h3 mb-0 text-gray-800">Liste des Enseignants</h1>
+    <div class="row mb-4">
+      <div class="col text-right">
+          <a href="{% url 'ajouter_enseignant' %}" class="btn btn-primary">Ajouter</a>
+      </div>
+    </div>
+  </div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Liste des Enseignants</h6>
+    </div>
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <tr>
+                <th class="text-center">Photo</th>
+                <th class="text-center">Nom et Prénom</th>
+                <th class="text-center">Sexe</th>
+                <th class="text-center">Âge</th>
+                <th class="text-center">E-mail</th>
+                <th class="text-center">Actions</th>
+        </tr>
+        {% for enseignant in enseignants %}
+        <tr>
+          <td class="text-center" >
+            {% if enseignant.photo %}
+            <img class="img-profile rounded-circle" src="{{ MEDIA_URL }}{{ enseignant.photo.url }}" alt="Photo de {{ enseignant.nom }}" width="50px" height="50px">
+            {% else %}
+                <p>Pas de photo disponible</p>
+            {% endif %}
+        </td>
+            <td class="text-center">{{ enseignant.nom }} {{ enseignant.prenom }}</td>
+            <td class="text-center">{{ enseignant.sexe }}</td>
+            <td class="text-center">{{ enseignant.age }} ans</td>
+            <td class="text-center">{{ enseignant.email }}</td>
+            <td class="text-center">
+                <a href="{% url 'detail_enseignant' enseignant.pk %}">Détails</a> |
+                <a href="{% url 'modifier_enseignant' enseignant.pk %}">Modifier</a> |
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#supModal" href="{% url 'supprimer_enseignant' enseignant.pk %}" >Supprimer</a>
+            </td>
+            {% empty %}
+                <tr>
+                <td colspan="8" class="text-center">Aucun enseignant trouvé.</td>
+                </tr>
+        </tr>
+        {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+
+{% comment %} #########################################################################################33 {% endcomment %}
+
+<div class="modal fade" id="supModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Vous deconnecter?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Voulez vous mettre fin à votre session ?</div>
+        <div class="modal-footer">
+          <form action="" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+            <button class="btn btn-primary" type="submit">Oui</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+{% comment %} ############################################################################################## {% endcomment %}
+
+
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(300, 0).slideUp(300, function(){
+      $(this).remove(); 
+    });
+  }, 2000);
+</script>
+
+
+<script src="{% static 'gestion/dash/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'gestion/dash/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'gestion/dash/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'gestion/dash/js/sb-admin-2.min.js' %}"></script>
+<script src="{% static 'gestion/dash/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'gestion/dash/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'gestion/dash/js/demo/datatables-demo.js' %}"></script>
+
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#dataTable').DataTable({
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/French.json"
+      }
+    });
+  });
+</script>
+{% endblock %} 

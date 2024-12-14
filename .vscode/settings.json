@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "root",
+            "group": "root",
+            "database": "${workspaceFolder:lako}/db.sqlite3"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}

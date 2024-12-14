@@ -1,0 +1,32 @@
+{% extends 'basee.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+<!-- templates/etudiants/detail.html -->
+<h1>Détails de l'étudiant</h1>
+<p>Nom : {{ etudiant.nom }} {{ etudiant.prenom }}</p>
+<p>Niveau : {{ etudiant.niveau }}</p>
+<p>Parcours : {{ etudiant.parcours }}</p>
+<p>Centre de formation : {{ etudiant.centre_formation }}</p>
+<p>Date de naissance : {{ etudiant.date_naissance }}</p>
+<p>Numéro de téléphone : {{ etudiant.num_telephone }}</p>
+<p>Lieu de résidence : {{ etudiant.lieu }}</p>
+<p>Photo : {% if etudiant.photo %}
+    <img class="img-profile rounded-circle" src="{{ MEDIA_URL }}{{ etudiant.photo.url }}" alt="Photo de profil" width="150px" height="150px">
+{% else %}
+    <img src="{% static 'default_image.png' %}" alt="Photo par défaut">
+{% endif %}</p>
+<a href="{% url 'modifier_etudiant' etudiant.pk %}">Modifier</a> |
+<a href="{% url 'supprimer_etudiant' etudiant.pk %}">Supprimer</a>
+
+
+
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+
+{% endblock %} 

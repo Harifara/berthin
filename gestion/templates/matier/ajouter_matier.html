@@ -1,0 +1,22 @@
+{% extends 'basee.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Ajouter Matiere</h1>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Ajouter</button>
+</form> 
+</div>
+<script>
+function afficherMessage(message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('alert', 'alert-success'); // Adaptez les classes CSS
+    messageDiv.textContent = message;
+    document.body.appendChild(messageDiv);
+}
+</script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+{% endblock %} 

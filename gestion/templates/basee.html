@@ -1,0 +1,281 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  
+
+  <title>Gestion Carte Etudiant</title>
+
+
+
+
+  <link rel="icon" href=" {% static 'enseignement/img/core-img/favicon.ico' %} ">
+  
+  <link href="{% static 'gestion/dash/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+ 
+  <link href="{% static 'gestion/dash/css/sb-admin-2.min.css' %}" rel="stylesheet">
+  <link href="{% static 'gestion/dash/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+<style>
+  .blink_me {
+  animation: blinker 10s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body id="page-top" oncontextmenu="return false;">
+
+{% comment %} ########################################################################################################## {% endcomment %}
+  <div id="wrapper">
+
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Logo -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-book"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Scolarite</div>
+      </a>
+    
+      <hr class="sidebar-divider my-0">
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+        </li>
+        <hr class="sidebar-divider">
+        <div class="sidebar-heading">Gestion</div>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEtudiants" aria-expanded="true" aria-controls="collapseEtudiants">
+              <i class="fas fa-fw fa-users"></i>
+              <span>ETUDIANTS</span>
+            </a>
+            <div id="collapseEtudiants" class="collapse" aria-labelledby="headingEtudiants" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                
+                <a class="collapse-item" href="{% url 'liste_etudiants' %}">Liste Etudiant</a>
+                <a class="collapse-item" href="{% url 'ajouter_etudiant' %}">Ajouter Etudiant</a>
+                
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsmatier" aria-expanded="true" aria-controls="collapsecart">
+              <i class="fas fa-fw fa-chalkboard-teacher"></i>
+              <span>MATIERE</span>
+            </a>
+            <div id="collapsmatier" class="collapse" aria-labelledby="headingcart" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'list_matier' %}">Liste matier</a>
+                <a class="collapse-item" href="{% url 'ajouter_matier' %}">Ajouter matier</a>
+                
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsniveau" aria-expanded="true" aria-controls="collapsecart">
+              <i class="fas fa-fw fa-chalkboard-teacher"></i>
+              <span>Niveau</span>
+            </a>
+            <div id="collapsniveau" class="collapse" aria-labelledby="headingcart" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'list_niveau' %}">Liste Niveau</a>
+                <a class="collapse-item" href="{% url 'ajouter_niveau' %}">Ajouter Niveau</a>
+                
+              </div>
+            </div>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEnseignants" aria-expanded="true" aria-controls="ccollapseEnseignantsi">
+              <i class="fas fa-fw fa-chalkboard-teacher"></i>
+              <span>ENSEIGNANT</span>
+            </a>
+            <div id="collapseEnseignants" class="collapse" aria-labelledby="headingEnseignants" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'list_enseignant' %}">Liste Enseignant</a>
+                <a class="collapse-item" href="{% url 'ajouter_enseignant' %}">Ajouter Enseignant</a>
+                
+              </div>
+            </div>
+          </li>
+
+       
+        
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUE" aria-expanded="true" aria-controls="collapseUE">
+              <i class="fas fa-fw fa-chalkboard-teacher"></i>
+              <span>U.E</span>
+            </a>
+            <div id="collapseUE" class="collapse" aria-labelledby="headingUE" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'list_ue' %}">Liste U.E</a>
+                <a class="collapse-item" href="{% url 'ajouter_ue' %}">Ajouter U.E</a>
+                
+              </div>
+            </div>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSemestre" aria-expanded="true" aria-controls="collapseSemestre">
+              <i class="fas fa-fw fa-chalkboard-teacher"></i>
+              <span>SEMESTRE</span>
+            </a>
+            <div id="collapseSemestre" class="collapse" aria-labelledby="headingSemestre" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'list_semestre' %}">Liste semestre</a>
+                <a class="collapse-item" href="{% url 'ajouter_semestre' %}">Ajouter semestre</a>
+                
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNote" aria-expanded="true" aria-controls="collapseNote">
+              <i class="fas fa-fw fa-chalkboard-teacher"></i>
+              <span>NOTE</span>
+            </a>
+            <div id="collapseNote" class="collapse" aria-labelledby="headingNote" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'list_note' %}">Liste note</a>
+                <a class="collapse-item" href="{% url 'ajouter_note'%}">Ajouter note</a>
+                <a href="#">Details</a>
+                
+              </div>
+            </div>
+          </li>
+
+          
+
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsecart" aria-expanded="true" aria-controls="collapsecart">
+              <i class="fas fa-fw fa-chalkboard-teacher"></i>
+              <span>CARTE ETUDIANT</span>
+            </a>
+            <div id="collapsecart" class="collapse" aria-labelledby="headingcart" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="#">Liste carte etudiant</a>
+                <a class="collapse-item" href="#">Ajouter carte etudiant</a>
+                
+              </div>
+            </div>
+          </li>
+
+
+
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+    
+    </ul>
+
+{% comment %} ########################################################################################################### {% endcomment %}
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+    <ul class="navbar-nav ml-auto">
+      <div class="topbar-divider d-none d-sm-block"></div>
+      <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ user.first_name }} {{ user.last_name }}</span>
+          <img class="img-profile rounded-circle" src="#">
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+          <a class="dropdown-item" href="#">
+            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+            Profile
+          </a>  
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+           Deconnexion
+          </a>
+        </div>
+      </li>
+    </ul> 
+  </nav>
+{% comment %} ################################################################################################################# {% endcomment %}
+
+    
+
+<div class="container-fluid">
+          
+               
+    {% block content %}
+        
+    {% endblock %}
+
+
+</div>
+
+
+  
+ 
+
+ 
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Vous deconnecter?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Voulez vous mettre fin à votre session ?</div>
+        <div class="modal-footer">
+          <form action="{% url 'deconnexion' %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+            <button class="btn btn-primary" type="submit">Oui</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <script>
+		window.setTimeout(function() {
+			$(".alert").fadeTo(300, 0).slideUp(300, function(){
+				$(this).remove(); 
+			});
+		}, 2000);
+  </script>
+
+ 
+  <script src="{% static 'gestion/dash/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'gestion/dash/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'gestion/dash/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'gestion/dash/js/sb-admin-2.min.js' %}"></script>
+  <script src="{% static 'gestion/dash/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'gestion/dash/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+  <script src="{% static 'gestion/dash/js/demo/datatables-demo.js' %}"></script>
+
+ 
+</body>
+
+</html>
